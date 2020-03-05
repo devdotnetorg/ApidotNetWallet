@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using ApidotNetWallet.Helper;
 using ApidotNetWallet.Models;
 using ApidotNetWallet.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -26,11 +28,11 @@ namespace ApidotNetWallet.Controllers
             _db = db;
         }
 
-        //Get Currencies
+        //GET Get Currencies
         [HttpGet]
         public async Task<ActionResult<Currency[]>> Get()
         {
-            var currencies = (await _db.Currencies.GetAll()).ToArray();
+            var currencies = await _db.Currencies.GetSelect(x => new { x.Code, x.Name });
             return Ok(currencies);
         }
     }

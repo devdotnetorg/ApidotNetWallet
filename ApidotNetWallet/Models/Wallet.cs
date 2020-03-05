@@ -9,13 +9,13 @@ namespace ApidotNetWallet.Models
     public class Wallet
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         // from the group model (Entity framework will connect the Primarykey and forign key)
         public virtual User User { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public virtual Currency Currency { get; set; }
-        public int CurrencyId { get; set; }
+        public Guid CurrencyId { get; set; }
         [Required]
-        public float Value { get; set; }
+        public decimal Value { get; set; }
     }
 }

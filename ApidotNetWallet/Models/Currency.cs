@@ -10,10 +10,12 @@ namespace ApidotNetWallet.Models
     public class Currency
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
+        [StringLength(5)]
         public string Code { get; set; }
         [Required]
+        [StringLength(30)]
         public string Name { get; set; }
         public virtual ICollection<Wallet> Wallets { get; set; }
 

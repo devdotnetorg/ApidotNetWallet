@@ -22,7 +22,7 @@ namespace ApidotNetWallet.Repositories
 
         #region Public Methods
 
-        public Task<TEntity> GetById(int id) => Context.Set<TEntity>().FindAsync(id).AsTask();
+        public Task<TEntity> GetById(Guid id) => Context.Set<TEntity>().FindAsync(id).AsTask();
 
         public Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
             => Context.Set<TEntity>().FirstOrDefaultAsync(predicate);
@@ -59,6 +59,16 @@ namespace ApidotNetWallet.Repositories
 
         public Task<int> CountWhere(Expression<Func<TEntity, bool>> predicate)
             => Context.Set<TEntity>().CountAsync(predicate);
+
+        public async Task<IEnumerable<TResult>> GetSelect<TResult>(Expression<Func<TEntity, TResult>> selector)
+        {
+            return await Context.Set<TEntity>().Select(selector).ToListAsync();
+        }
+
+        public async Task<IEnumerable<TResult>> GetWhereSelect<TResult>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TResult>> selector)
+        {
+            return await Context.Set<TEntity>().Where(predicate).Select(selector).ToListAsync();
+        }
 
         #endregion
     }

@@ -15,7 +15,6 @@ namespace ApidotNetWallet.Models
             DBInitializerdotNetWallet.Seed(this); 
         }
         public DbSet<Currency> Currencies { get; set; }
-        public DbSet<Token> Tokens { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
 
@@ -29,21 +28,8 @@ namespace ApidotNetWallet.Models
             modelBuilder.Entity<Currency>()
             .HasIndex(u => u.Code)
             .IsUnique();
-            //
-            /*
-            modelBuilder.Entity<User>()
-                .HasMany(x => x.Wallets)
-                .WithOne(y => y.User)
-                .IsRequired()
-                .HasForeignKey(z => z.UserId);
-             
-            modelBuilder.Entity<Currency>()
-                .HasMany(x => x.Wallets)
-                .WithOne(y => y.Currency)
-                .IsRequired()
-                .HasForeignKey(z => z.CurrencyId);
-                */
-
+            //составной ключ
+            modelBuilder.Entity<Wallet>().HasKey(u => new { u.UserId, u.CurrencyId});
         }
 
     }

@@ -15,7 +15,7 @@ namespace ApidotNetWallet.Repositories
 
         public Task AddWithPassword(User user)
         {
-            user.Password=BaseHelper.GetSHA1(user.Password);
+            user.Password=BaseHelper.GetPbkdf2(user.Password);
             return Add(user);
         }
     }
