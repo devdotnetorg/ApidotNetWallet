@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApidotNetWallet.Models
 {
     public static class DBInitializerdotNetWallet
     {
+        /// <summary>
+        /// Заполнение БД. Справочники.
+        /// </summary>
         public static void Seed(WalletApiContext db)
         {
             //Проверка наличие справочника

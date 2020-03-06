@@ -12,6 +12,5 @@ namespace ApidotNetWallet.Repositories
         IWalletRepository Wallets { get; }
 
         Task Commit();
-        //IMessageRepository Messages { get; }
     }
 }

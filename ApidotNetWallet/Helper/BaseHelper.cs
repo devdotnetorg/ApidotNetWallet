@@ -1,12 +1,22 @@
 ﻿using System;
-using System.Security.Cryptography;
-using System.Text;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace ApidotNetWallet.Helper
 {
+    /// <summary>
+    /// Helper
+    /// </summary>
     public static class BaseHelper
     {
+        /// <summary>
+        /// Формирование ключа на основе пароля по стандарту PBKDF2 
+        /// Создание пользователя
+        /// </summary>
+        /// <returns>
+        /// Ключ
+        /// </returns>
+        /// <param name="password">Парольная фраза
+        /// </param>
         public static string GetPbkdf2(string password)
         {
             // generate a 128-bit salt using a secure PRNG
@@ -26,14 +36,28 @@ namespace ApidotNetWallet.Helper
                 prf: KeyDerivationPrf.HMACSHA1,
                 iterationCount: 10000,
                 numBytesRequested: 256 / 8));
-            //
             return hashed;
         }
+
+        /// <summary>
+        /// Настройки приложения.
+        /// </summary>
         public class AppSettings
         {
+            /// <value>Ключ для шифрования токена</value>
             public string Secret { get; set; }
         }
 
+        /// <summary>
+        /// Операция покупки EUR, продажи EUR в указанную валюту.
+        /// Финансовые операции проходят через EUR
+        /// </summary>
+        /// <returns>
+        /// Итоговая сумма в кончной валюте
+        /// </returns>
+        /// <param name="rateBuy">Курс покупки EUR по курсу исходной валюты</param>
+        /// <param name="amountBuy">Сумма в первоначальной валюте</param>
+        /// <param name="rateSell">Курс продажи EUR в валюте </param>
         public static decimal BuySell(decimal rateBuy, decimal amountBuy, decimal rateSell)
         {
             var sumBuy = amountBuy / rateBuy;

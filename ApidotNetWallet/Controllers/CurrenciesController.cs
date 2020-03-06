@@ -1,21 +1,14 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using ApidotNetWallet.Helper;
+﻿using System.Threading.Tasks;
 using ApidotNetWallet.Models;
 using ApidotNetWallet.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace ApidotNetWallet.Controllers
 {
+    /// <summary>
+    /// Класс для работы со справочником валют
+    /// </summary>
     [Route("funding-sources/v1/[controller]")]
     public class CurrenciesController : Controller
     {
@@ -28,7 +21,14 @@ namespace ApidotNetWallet.Controllers
             _db = db;
         }
 
-        //GET Get Currencies
+        /// <summary>
+        /// Возвращает массив JSON - справочник валют
+        /// </summary>
+        /// <returns>
+        ///OUT 200 OK JSON
+        ///[{"code": "RUB","name": "Рубль"},
+        ///{"code": "USD","name": "Доллар"]
+        /// </returns>
         [HttpGet]
         public async Task<ActionResult<Currency[]>> Get()
         {

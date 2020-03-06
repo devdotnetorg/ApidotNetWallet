@@ -44,12 +44,12 @@ D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\Npgsql
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\staticwebassets\ApidotNetWallet.StaticWebAssets.Manifest.cache
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\staticwebassets\ApidotNetWallet.StaticWebAssets.xml
-D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.MvcApplicationPartsAssemblyInfo.cache
-D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\EFCoreNpgsqlNodaTime.cs
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.AssemblyInfoInputs.cache
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.AssemblyInfo.cs
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.RazorTargetAssemblyInfo.cache
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.csproj.CopyComplete
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.dll
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.pdb
+D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.MvcApplicationPartsAssemblyInfo.cache
+D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\EFCoreNpgsqlNodaTime.cs
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.csprojAssemblyReference.cache
