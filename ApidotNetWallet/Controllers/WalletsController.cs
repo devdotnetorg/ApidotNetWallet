@@ -83,15 +83,15 @@ namespace ApidotNetWallet.Controllers
         /// </param>
         [Authorize]
         [HttpPut]
-        public async Task<ActionResult<Wallet>> CreateWallet([FromBody]string code)
+        public async Task<ActionResult<Wallet>> CreateWallet([FromBody] Currency currency)
         {
             var emailUser = User.Identity.Name;
             var user = await _db.Users.FirstOrDefault(x => x.Email == emailUser);
             if (user == null) return NotFound(new { errorText = "Пользователь не найден" });
             //
-            if (code == null) return BadRequest(new { errorText = "Не указан код валюты" });
+            if (currency.Code == null) return BadRequest(new { errorText = "Не указан код валюты" });
             //
-            var findcurrency = await _db.Currencies.FirstOrDefault(x => x.Code == code);
+            var findcurrency = await _db.Currencies.FirstOrDefault(x => x.Code == currency.Code);
             if (findcurrency == null) return NotFound(new { errorText = "Указанный код валюты кошелька не найден" });
             if (user.Wallets.FirstOrDefault(x=>x.Currency.Id== findcurrency.Id)!=null) return BadRequest(new { errorText = "Кошелек с указанным кодом валюты уже существует" });
             //
