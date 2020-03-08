@@ -18,6 +18,11 @@ namespace ApidotNetWallet
     {
         public Startup(IConfiguration configuration)
         {
+            //Change folder for appsettings.json
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile("config/appsettings.json", optional: false, reloadOnChange: true);
+            configuration = builder.Build();
+            //
             Configuration = configuration;
         }
 

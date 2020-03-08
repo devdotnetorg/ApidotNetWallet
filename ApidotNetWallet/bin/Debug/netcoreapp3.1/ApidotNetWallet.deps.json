@@ -14,7 +14,7 @@
     "platform": "",
     "allowUnsafe": false,
     "warningsAsErrors": false,
-    "optimize": false,
+    "optimize": true,
     "keyFile": "",
     "emitEntryPoint": true,
     "xmlDoc": false,
@@ -22,7 +22,7 @@
   },
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "ApidotNetWallet/1.0.0": {
+      "ApidotNetWallet/1.1.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.2",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.1.2",
@@ -3200,7 +3200,7 @@
     }
   },
   "libraries": {
-    "ApidotNetWallet/1.0.0": {
+    "ApidotNetWallet/1.1.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

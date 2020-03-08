@@ -21,5 +21,5 @@ RUN dotnet publish "ApidotNetWallet.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-#VOLUME ["/app/logs"]
+VOLUME ["/app/config"]
 ENTRYPOINT ["dotnet", "ApidotNetWallet.dll"]

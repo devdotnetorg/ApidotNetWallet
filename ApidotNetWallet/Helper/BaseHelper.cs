@@ -46,6 +46,7 @@ namespace ApidotNetWallet.Helper
         {
             /// <value>Ключ для шифрования токена</value>
             public string Secret { get; set; }
+            public string Test { get; set; }
         }
 
         /// <summary>

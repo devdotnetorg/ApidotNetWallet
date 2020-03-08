@@ -1,7 +1,7 @@
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\appsettings.Development.json
-D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\appsettings.json
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\ApidotNetWallet.exe
+D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\config\appsettings.json
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\ApidotNetWallet.deps.json
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\ApidotNetWallet.runtimeconfig.json
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\ApidotNetWallet.runtimeconfig.dev.json
@@ -42,7 +42,6 @@ D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\Npgsql
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime.dll
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\Npgsql.NodaTime.dll
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
-D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.csprojAssemblyReference.cache
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\staticwebassets\ApidotNetWallet.StaticWebAssets.Manifest.cache
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\staticwebassets\ApidotNetWallet.StaticWebAssets.xml
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.MvcApplicationPartsAssemblyInfo.cache
@@ -53,3 +52,4 @@ D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\Apidot
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.csproj.CopyComplete
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.dll
 D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.pdb
+D:\Anton\Projects\ApidotNetWallet\ApidotNetWallet\obj\Debug\netcoreapp3.1\ApidotNetWallet.csprojAssemblyReference.cache
