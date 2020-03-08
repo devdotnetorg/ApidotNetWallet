@@ -6,25 +6,15 @@ Core 3.1, ASP NET Web API, Entity Framework Core PostgreSQL, xUnit.
 
 ### Upstream Links
 
+* Demo site (offline): [https://dotNetWallet.devdotnet.org](https://dotNetWallet.devdotnet.org)
+* Demo Web API  (offline): [https://api.dotNetWallet.devdotnet.org](https://api.dotNetWallet.devdotnet.org)
 * Docker Registry @ [devdotnetorg/apidotnetwallet](https://hub.docker.com/r/devdotnetorg/apidotnetwallet)
 
 * GitHub @ [devdotnetorg/apidotnetwallet](https://github.com/devdotnetorg/ApidotNetWallet)
 
-## Руководство версия V4 от 08.03.2020
+### Change Log
+**1.1.0 03/08/2010** The configuration file appsettings.json was moved to the /config/ folder for the ability to mount Volume in Docker
 
-#### Аннотация: Сервис Web API обеспечивает использование виртуальных кошельков с возможностью хранения денег в различных валютах.
+**1.0.0 03/06/2010** First build
 
-Доступны операции c валютой: зачисление денежных средств с банковской карты, вывод денежных средств на банковскую карту, перевод денег между счетами.
-
-Курсы расчета валют устанавливаются с сервиса:
--   ​<https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml>
-
-### Технологии
-
-Платформа - .NET Core 3.1
-
-ORM - Entity Framework
-
-База данных – Postgresql
-
-Тесты - xUnit
+Read more on the [Wiki](https://github.com/devdotnetorg/ApidotNetWallet/wiki)
