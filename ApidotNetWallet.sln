@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApidotNetWallet", "ApidotNetWallet\ApidotNetWallet.csproj", "{1EC1BB8B-7EB9-4F07-877D-6E27FD8A533E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApidotNetWallet", "ApidotNetWallet\ApidotNetWallet.csproj", "{1EC1BB8B-7EB9-4F07-877D-6E27FD8A533E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApidotNetWalletTest", "ApidotNetWalletTest\ApidotNetWalletTest.csproj", "{29E90CBE-86BC-4150-A27F-00D1DD170828}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApidotNetWalletTest", "ApidotNetWalletTest\ApidotNetWalletTest.csproj", "{29E90CBE-86BC-4150-A27F-00D1DD170828}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

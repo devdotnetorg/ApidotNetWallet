@@ -1,4 +1,3 @@
-
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1.2-alpine3.11 AS base
 MAINTAINER DevDotNet.Org <anton@devdotnet.org>
 LABEL maintainer="DevDotNet.Org <anton@devdotnet.org>"
@@ -22,4 +21,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 VOLUME ["/app/config"]
+VOLUME ["/app/seeddata"]
 ENTRYPOINT ["dotnet", "ApidotNetWallet.dll"]

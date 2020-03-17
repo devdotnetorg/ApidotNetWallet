@@ -33,8 +33,8 @@ namespace ApidotNetWallet.Controllers
         /// [{"code": "RUB","name": "Рубль","value": 0.2},
         /// {"code": "USD","name": "Доллар","value": 0.2}]
         /// </returns>
-        [Authorize]
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<Wallet[]>> GetAll()
         {
             var emailUser = User.Identity.Name;
@@ -55,8 +55,8 @@ namespace ApidotNetWallet.Controllers
         /// </returns>
         /// <param name="code">Код валюты кошелька. Пример: RUB, USD.
         /// </param>
-        [Authorize]
         [HttpGet("{code}")]
+        [Authorize]
         public async Task<ActionResult<Wallet>> GetWallet(string code)
         {
             var emailUser = User.Identity.Name;
@@ -81,10 +81,11 @@ namespace ApidotNetWallet.Controllers
         /// </returns>
         /// <param name="code">Код валюты кошелька. Пример: RUB, USD.
         /// </param>
-        [Authorize]
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult<Wallet>> CreateWallet([FromBody] Currency currency)
         {
+            #region Data Validation
             var emailUser = User.Identity.Name;
             var user = await _db.Users.FirstOrDefault(x => x.Email == emailUser);
             if (user == null) return NotFound(new { errorText = "Пользователь не найден" });
@@ -94,6 +95,7 @@ namespace ApidotNetWallet.Controllers
             var findcurrency = await _db.Currencies.FirstOrDefault(x => x.Code == currency.Code);
             if (findcurrency == null) return NotFound(new { errorText = "Указанный код валюты кошелька не найден" });
             if (user.Wallets.FirstOrDefault(x=>x.Currency.Id== findcurrency.Id)!=null) return BadRequest(new { errorText = "Кошелек с указанным кодом валюты уже существует" });
+            #endregion
             //
             Wallet newWallet = new Wallet() { Id=Guid.NewGuid(), User = user, Currency = findcurrency, Value = 0 };
             await _db.Wallets.Add(newWallet);
@@ -114,8 +116,8 @@ namespace ApidotNetWallet.Controllers
         /// </returns>
         /// <param name="code">Код валюты кошелька. Пример: RUB, USD.
         /// </param>
-        [Authorize]
         [HttpDelete("{code}")]
+        [Authorize]
         public async Task<ActionResult<Wallet>> DeleteWallet(string code)
         {
             var emailUser = User.Identity.Name;

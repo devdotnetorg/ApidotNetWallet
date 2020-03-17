@@ -42,18 +42,22 @@ namespace ApidotNetWallet.Controllers
         /// {"email":"goga@gmail.com", "name":"goga","password":"goga123456"}
         /// </param>
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<string>> Post([FromBody]User user)
         {
+            #region Data Validation
             if (user == null) return NotFound(new { errorText = "Пользователь не найден" });
+            user = UserTrim(user);
             // если есть ошибки - возвращаем ошибку 400
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            //
-            user = UserTrim(user);
+            //valid email
+            if(!BaseHelper.IsValidEmail(user.Email)) return BadRequest(new { errorText = String.Format("Email: {0} не является адресом электронной почты. Укажите правильный Email вида: user@domain.ltd", user.Email) });
             //unique email verification
             if (await _db.Users.FirstOrDefault(x => x.Email == user.Email) != null)
             {
                 return BadRequest(new { errorText = String.Format("Пользователь с Email: {0} уже существует. Укажите другой Email.", user.Email) });
             }
+            #endregion
             //
             user.CreateDate = DateTime.Now;
             try
@@ -77,8 +81,8 @@ namespace ApidotNetWallet.Controllers
         ///OUT 200 OK JSON
         /// {"email":"goga@gmail.com", "name":"goga"}
         /// </returns>
-        [Authorize]
         [HttpGet("info")]
+        [Authorize]
         public async Task<ActionResult<string>> GetInfo()
         {
             var emailUser = User.Identity.Name;
@@ -98,14 +102,14 @@ namespace ApidotNetWallet.Controllers
         /// <param name="user">JSON Аттрибуты нового пользователя.
         /// {"name":"goga","password":"goga123456"}
         /// </param>
-        [Authorize]
         [HttpPut("info")]
+        [Authorize]
         public async Task<ActionResult<User>> Put([FromBody]User user)
         {
             if (user == null) return NotFound(new { errorText = "Новые данные пользователя для изменения отсутствуют" });
+            user = UserTrim(user);
             // если есть ошибки - возвращаем ошибку 400
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            user = UserTrim(user);
             //
             var emailUser = User.Identity.Name;
             var newuser = await _db.Users.FirstOrDefault(x => x.Email == emailUser);
@@ -129,6 +133,7 @@ namespace ApidotNetWallet.Controllers
         /// {"email":"goga@gmail.com","password":"goga123456"}
         /// </param>
         [HttpPost("token")]
+        [AllowAnonymous]
         public ActionResult<string> Token([FromBody]User user)
         {
             user = UserTrim(user);
@@ -136,7 +141,7 @@ namespace ApidotNetWallet.Controllers
             var strsha1Password = BaseHelper.GetPbkdf2(user.Password);
             //Find User
             User finduser = _db.Users.FirstOrDefault(x => x.Email == user.Email && x.Password == strsha1Password).Result;
-            if (finduser == null) BadRequest(new { errorText = "Неверное имя пользователя или пароль." });
+            if (finduser == null) return BadRequest(new { errorText = "Неверное имя пользователя или пароль." });
             var encodedJwt = _authenticationJWTService.GetToken(user.Email);
             //
             return Ok(new { token = encodedJwt });

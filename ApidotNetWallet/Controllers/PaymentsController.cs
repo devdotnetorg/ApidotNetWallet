@@ -45,6 +45,7 @@ namespace ApidotNetWallet.Controllers
         ///{"code": "JPY","rate": 119.63}]
         /// </returns>
         [HttpGet("crossRates")]
+        [AllowAnonymous]
         public ActionResult<string> GetAll()
         {
             UpdateCrossRates();
@@ -63,6 +64,7 @@ namespace ApidotNetWallet.Controllers
         /// </returns>
         /// <param name="id">Код валюты. Пример: RUB.</param>
         [HttpGet("crossRates/{id}")]
+        [AllowAnonymous]
         public ActionResult<string> GetAll(string id)
         {
             UpdateCrossRates();
@@ -88,10 +90,11 @@ namespace ApidotNetWallet.Controllers
         /// кошелька - codewallet. Сумма - amount.
         /// {"numbercard":"123456","codewallet": "RUB","amount": 10.1}
         /// </param>
-        [Authorize]
         [HttpPost("1")]
+        [Authorize]
         public async Task<ActionResult<string>> PaymentCardToWallet([FromBody]JObject raw)
         {
+            # region Data Validation
             var emailUser = User.Identity.Name;
             var user = await _db.Users.FirstOrDefault(x => x.Email == emailUser);
             if (user == null) return NotFound(new { errorText = "Пользователь не найден" });
@@ -109,6 +112,7 @@ namespace ApidotNetWallet.Controllers
             //
             var wallet = user.Wallets.FirstOrDefault(x => x.Currency.Id == currencySell.Id);
             if (wallet == null) return NotFound(new { errorText = "Кошелек с указанным кодом валюты не существует" });
+            #endregion
             //Transfer
             UpdateCrossRates();
             var rateBuy = _rates.FirstOrDefault(x => x.Key == currencyBuy);
@@ -146,11 +150,11 @@ namespace ApidotNetWallet.Controllers
         /// кошелька - codewallet. Сумма - amount.
         /// {"numbercard":"123456","codewallet": "RUB","amount": 10.1}
         /// </param>
-        [Authorize]
         [HttpPost("2")]
+        [Authorize]
         public async Task<ActionResult<string>> PaymentWalletToCard([FromBody]JObject raw)
         {
-
+            # region Data Validation
             var emailUser = User.Identity.Name;
             var user = await _db.Users.FirstOrDefault(x => x.Email == emailUser);
             if (user == null) return NotFound(new { errorText = "Пользователь не найден" });
@@ -170,6 +174,7 @@ namespace ApidotNetWallet.Controllers
             if (wallet == null) return NotFound(new { errorText = "Кошелек с указанным кодом валюты не существует" });
             //Проверка минимальных средств
             if (wallet.Value < amount) return BadRequest(new { errorText = "У Вас недостаточно средств для снятия с кошелька" });
+            #endregion
             //Transfer
             decimal sum = 0;
             sum = amount;
@@ -203,10 +208,11 @@ namespace ApidotNetWallet.Controllers
         /// валюта второго кошелька - codewallet2. Сумма - amount.
         /// {"codewallet1":"RUB","codewallet2": "USD","amount": 10.1}
         /// </param>
-        [Authorize]
         [HttpPost("3")]
+        [Authorize]
         public async Task<ActionResult<string>> PaymentWalletToWallet([FromBody]JObject raw)
         {
+            #region Data Validation
             var emailUser = User.Identity.Name;
             var user = await _db.Users.FirstOrDefault(x => x.Email == emailUser);
             if (user == null) return NotFound(new { errorText = "Пользователь не найден" });
@@ -229,6 +235,7 @@ namespace ApidotNetWallet.Controllers
             if (wallet1 == null || wallet2 == null) return NotFound(new { errorText = "Кошелек с указанным кодом валюты не существует" });
             //Проверка минимальных средств
             if (wallet1.Value < amount) return BadRequest(new { errorText = "У Вас недостаточно средств для перевода с кошелька" });
+            #endregion
             //Transfer
             UpdateCrossRates();
             var rateBuy = _rates.FirstOrDefault(x => x.Key == currencyBuy.Code);

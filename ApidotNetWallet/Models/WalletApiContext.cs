@@ -14,7 +14,8 @@ namespace ApidotNetWallet.Models
         public WalletApiContext(DbContextOptions<WalletApiContext> options) : base(options)
         {
             //Создание базы данных, если ее нет
-            Database.EnsureCreated();
+            Database.Migrate();
+            //Database.EnsureCreated();
             //Инициализация БД
             DBInitializerdotNetWallet.Seed(this); 
         }

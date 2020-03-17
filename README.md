@@ -13,8 +13,23 @@ Core 3.1, ASP NET Web API, Entity Framework Core PostgreSQL, xUnit.
 * GitHub @ [devdotnetorg/apidotnetwallet](https://github.com/devdotnetorg/ApidotNetWallet)
 
 ### Change Log
-**1.1.0 - 08.03.2020** The configuration file appsettings.json was moved to the /config/ folder for the ability to mount Volume in Docker
 
-**1.0.0 - 06.03.2020** First build
+**17.03.2020**
+
+**1.2.0** 
+* Add migrations
+* Added currency reference path - /seeddata/currencies.json
+* Added Swagger to document RESTful WEB API
+* Add DockerfileARM for ARM processors
+
+**08.03.2020**
+
+**1.1.0**
+* The configuration file appsettings.json was moved to the /config/ folder for the ability to mount Volume in Docker
+
+
+**06.03.2020**
+
+**1.0.0 - ** First build
 
 Read more on the [Wiki](https://github.com/devdotnetorg/ApidotNetWallet/wiki)

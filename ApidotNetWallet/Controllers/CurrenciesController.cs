@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ApidotNetWallet.Models;
 using ApidotNetWallet.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -30,6 +31,7 @@ namespace ApidotNetWallet.Controllers
         ///{"code": "USD","name": "Доллар"]
         /// </returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<Currency[]>> Get()
         {
             var currencies = await _db.Currencies.GetSelect(x => new { x.Code, x.Name });
