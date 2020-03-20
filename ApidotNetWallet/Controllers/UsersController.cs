@@ -65,7 +65,7 @@ namespace ApidotNetWallet.Controllers
                 await _db.Users.AddWithPassword(user);
                 //Add Wallet RUB
                 var currency = await _db.Currencies.FirstOrDefault(x => x.Code == "RUB");
-                Wallet RUBWallet = new Wallet() { CurrencyId = currency.Id, UserId = user.Id, Value = 0 };
+                Wallet RUBWallet = new Wallet() { Id = Guid.NewGuid(), CurrencyId = currency.Id, UserId = user.Id, Value = 0 };
                 await _db.Wallets.Add(RUBWallet);
             }
             catch (Exception ex)
