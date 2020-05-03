@@ -1,22 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ApidotNetWallet.Models;
 using ApidotNetWallet.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using static ApidotNetWallet.Helper.BaseHelper;
 using System.Text;
 using ApidotNetWallet.Services;
+using Microsoft.OpenApi.Models;
+using ApidotNetWallet.Helper;
 
 namespace ApidotNetWallet
 {
@@ -24,6 +20,11 @@ namespace ApidotNetWallet
     {
         public Startup(IConfiguration configuration)
         {
+            //Change folder for appsettings.json
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile("config/appsettings.json", optional: false, reloadOnChange: true);
+            configuration = builder.Build();
+            //
             Configuration = configuration;
         }
 
@@ -32,18 +33,19 @@ namespace ApidotNetWallet
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Add Controllers
-                services.AddControllers()
+            //Add NewtonsoftJson
+            services.AddControllers()
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            
+
             //add support DataBase
             services.AddEntityFrameworkNpgsql().AddDbContext<WalletApiContext>(opt => {
                 opt.UseLazyLoadingProxies()
-                .UseNpgsql(Configuration.GetConnectionString("DBWebApiConection")/*,
-                    o => o.UseNodaTime()*/);
-                }, ServiceLifetime.Singleton);
+                .UseNpgsql(Configuration.GetConnectionString("DBWebApiConection"));
+            }, ServiceLifetime.Singleton);
+
             //Репозитарий
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            //Settings jwt authentication
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
@@ -69,21 +71,37 @@ namespace ApidotNetWallet
                             ValidateLifetime = true,
                             // установка ключа безопасности
                             IssuerSigningKey = new SymmetricSecurityKey(key),
-                        // валидация ключа безопасности
-                        ValidateIssuerSigningKey = true,
+                            // валидация ключа безопасности
+                            ValidateIssuerSigningKey = true,
                         };
                     });
             // configure DI for application services
             services.AddScoped<IAuthenticateService, AuthenticationJWTService>();
+            //
+            // Inject an implementation of ISwaggerProvider with defaulted settings applied
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo{Title = "My API",Version = "v1"});
+            });
+            //
+                    
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseRouting();
 
@@ -93,7 +111,14 @@ namespace ApidotNetWallet
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                //Redirect
+                endpoints.MapGet("/", async context =>
+                {
+                    context.Response.Redirect("/swagger/index.html");
+                });
             });
+            //обработка ошибок HTTP
+            app.UseStatusCodePages();
         }
     }
 }

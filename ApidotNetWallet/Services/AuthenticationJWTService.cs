@@ -1,17 +1,17 @@
-﻿using ApidotNetWallet.Helper;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using static ApidotNetWallet.Helper.BaseHelper;
 
 namespace ApidotNetWallet.Services
 {
+    /// <summary>
+    /// Сервис Аутентификации
+    /// </summary>
     public class AuthenticationJWTService : IAuthenticateService
     {
         private readonly AppSettings _appSettings;
@@ -28,6 +28,14 @@ namespace ApidotNetWallet.Services
             return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_appSettings.Secret));
         }
 
+        /// <summary>
+        /// Получить токен
+        /// </summary>
+        /// <returns>
+        /// Токен
+        /// </returns>
+        /// <param name="login">Login пользователя
+        /// </param>
         public string GetToken(string login)
         {
             var claims = new List<Claim>
@@ -39,7 +47,6 @@ namespace ApidotNetWallet.Services
                     ClaimsIdentity.DefaultRoleClaimType);
             //
             var now = DateTime.UtcNow;
-            //
             var jwt = new JwtSecurityToken(
                     issuer: AuthenticationJWTService.ISSUER,
                     audience: AuthenticationJWTService.AUDIENCE,
@@ -47,7 +54,6 @@ namespace ApidotNetWallet.Services
                     claims: claimsIdentity.Claims,
                     expires: now.Add(TimeSpan.FromMinutes(AuthenticationJWTService.LIFETIME)),
                     signingCredentials: new SigningCredentials(GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-            //
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
             //
             return encodedJwt;

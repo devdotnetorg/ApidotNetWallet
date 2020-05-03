@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace ApidotNetWallet.Models
 {
+    /// <summary>
+    /// Context базы данных.
+    /// </summary>
     public class WalletApiContext : DbContext
     {
         public WalletApiContext(DbContextOptions<WalletApiContext> options) : base(options)
         {
-            Database.EnsureCreated();
-            //Init DB
+            //Создание базы данных, если ее нет
+            Database.Migrate();
+            //Database.EnsureCreated();
+            //Инициализация БД
             DBInitializerdotNetWallet.Seed(this); 
         }
         public DbSet<Currency> Currencies { get; set; }

@@ -9,8 +9,5 @@ namespace ApidotNetWallet.Repositories
     public class WalletRepository : BaseRepository<Wallet>, IWalletRepository
     {
         public WalletRepository(WalletApiContext context) : base(context) { }
-
-
-
     }
 }
