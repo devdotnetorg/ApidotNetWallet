@@ -20,7 +20,7 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime" Version="3.1.2" />
     
-	<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.Dotnet" Version="1.0.1" />
+	<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.Dotnet" Version="3.1.2" />
 		
   </ItemGroup>
 
