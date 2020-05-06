@@ -112,10 +112,7 @@ namespace ApidotNetWallet
             {
                 endpoints.MapControllers();
                 //Redirect
-                endpoints.MapGet("/", async context =>
-                {
-                    context.Response.Redirect("/swagger/index.html");
-                });
+                endpoints.MapGet("/", async context => context.Response.Redirect("/swagger/index.html"));
             });
             //обработка ошибок HTTP
             app.UseStatusCodePages();
