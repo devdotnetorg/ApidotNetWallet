@@ -14,6 +14,10 @@ Core 3.1, ASP NET Web API, Entity Framework Core PostgreSQL, xUnit.
 
 ### Change Log
 
+**20.03.2020 - 1.2.1**
+
+* Fix errors
+
 **17.03.2020 - 1.2.0**
 
 * Add migrations
